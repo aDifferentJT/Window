@@ -22,13 +22,14 @@ class ViewController: UIViewController {
         faceTracker.zoom = Double(zoom.value)
         faceTracker.zoomCalibrate = Double(zoomCalibrate.value)
     }
+    @IBOutlet var previewContainer: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         scene = Scene(scnView: scnView)
 
-        faceTracker = FaceTracker(callback: scene.setViewLocation)
+        faceTracker = FaceTracker(callback: scene.setViewLocation, previewContainer: previewContainer)
     }
 
     override func didReceiveMemoryWarning() {

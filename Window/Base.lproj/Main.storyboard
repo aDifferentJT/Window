@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,15 +80,22 @@
                                     <constraint firstAttribute="width" constant="50" id="lwS-Wv-A1t"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O55-Ao-wOd" userLabel="Preview Container">
+                                <rect key="frame" x="718" y="531" width="256" height="187"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="O55-Ao-wOd" firstAttribute="trailing" secondItem="wPO-Wz-AKT" secondAttribute="leading" id="2dY-ch-lsR"/>
                             <constraint firstItem="wPO-Wz-AKT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4XX-Mv-QgH"/>
                             <constraint firstItem="k4c-w4-IOB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5vR-op-Drg"/>
                             <constraint firstItem="njG-po-hcm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HG1-cY-x7b"/>
                             <constraint firstItem="wPO-Wz-AKT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="J0M-Au-8zX"/>
                             <constraint firstItem="KEL-P1-yZ2" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OE3-H3-spu"/>
+                            <constraint firstItem="O55-Ao-wOd" firstAttribute="width" secondItem="KEL-P1-yZ2" secondAttribute="width" multiplier="0.25" id="OEL-RT-Y7f"/>
                             <constraint firstItem="njG-po-hcm" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bMq-v7-w2F"/>
+                            <constraint firstItem="O55-Ao-wOd" firstAttribute="height" secondItem="KEL-P1-yZ2" secondAttribute="height" multiplier="0.25" id="bnd-ZE-UXn"/>
                             <constraint firstItem="wPO-Wz-AKT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="cRT-iG-7O7"/>
                             <constraint firstItem="KEL-P1-yZ2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jce-br-dQk"/>
                             <constraint firstItem="k4c-w4-IOB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nuQ-1m-lYM"/>
@@ -95,10 +103,12 @@
                             <constraint firstItem="njG-po-hcm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="t1X-7a-K31"/>
                             <constraint firstItem="k4c-w4-IOB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="v8e-eL-zgS"/>
                             <constraint firstItem="KEL-P1-yZ2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zgR-b9-Qjj"/>
+                            <constraint firstItem="O55-Ao-wOd" firstAttribute="bottom" secondItem="njG-po-hcm" secondAttribute="top" id="zyP-E8-YnR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="previewContainer" destination="O55-Ao-wOd" id="xPD-YL-R1S"/>
                         <outlet property="scnView" destination="KEL-P1-yZ2" id="lDC-eJ-UtV"/>
                         <outlet property="xyScale" destination="njG-po-hcm" id="9N9-fu-N6u"/>
                         <outlet property="zoom" destination="bBX-BG-bzc" id="ypS-uD-imN"/>
