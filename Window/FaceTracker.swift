@@ -47,7 +47,6 @@ class FaceTracker: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     let captureSession: AVCaptureSession
     let captureDevice: AVCaptureDevice!
     let videoInput: AVCaptureDeviceInput
-    let videoDispatchQueue: DispatchQueue
 
     let metadataOutput: AVCaptureMetadataOutput
 
@@ -61,7 +60,6 @@ class FaceTracker: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         captureSession = AVCaptureSession()
         captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
         do {try videoInput = AVCaptureDeviceInput(device: captureDevice)} catch {fatalError("No Video Input")}
-        videoDispatchQueue = DispatchQueue.main //DispatchQueue(label: "videoQueue", qos: .userInteractive, autoreleaseFrequency: .workItem)
         metadataOutput = AVCaptureMetadataOutput()
 
         super.init()
@@ -86,7 +84,7 @@ class FaceTracker: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         captureSession.startRunning()
 
         metadataOutput.metadataObjectTypes = [.face]
-        metadataOutput.setMetadataObjectsDelegate(self, queue: videoDispatchQueue)
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
     }
 
     deinit {
