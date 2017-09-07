@@ -7,12 +7,29 @@
 //
 
 import UIKit
+import Vision
+import SceneKit
 
 class ViewController: UIViewController {
+    var faceTracker: FaceTracker!
+
+    @IBOutlet var scnView: SCNView!
+    var scene: Scene!
+    @IBOutlet var xyScale: UISlider!
+    @IBOutlet var zoom: UISlider!
+    @IBOutlet var zoomCalibrate: UISlider!
+    @IBAction func updateScale() {
+        faceTracker.xyScale = Double(xyScale.value)
+        faceTracker.zoom = Double(zoom.value)
+        faceTracker.zoomCalibrate = Double(zoomCalibrate.value)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        scene = Scene(scnView: scnView)
+
+        faceTracker = FaceTracker(callback: scene.setViewLocation)
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +37,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func update() {
 
+    }
 }
 
