@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="20" width="50" height="748"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.25" maxValue="1.75" translatesAutoresizingMaskIntoConstraints="NO" id="bBX-BG-bzc" userLabel="zoom" customClass="UISliderRotate" customModule="Window" customModuleProvider="target">
-                                        <rect key="frame" x="1.9999999999999787" y="-3.9999999999999996" width="48.000000000000043" height="755"/>
+                                        <rect key="frame" x="1.4999999999999787" y="-3.4999999999999996" width="48.000000000000043" height="755"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rotation">
                                                 <real key="value" value="90"/>
@@ -60,7 +60,7 @@
                                 <rect key="frame" x="974" y="0.0" width="50" height="768"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="VUv-xl-hGt" userLabel="zoomCalibrate" customClass="UISliderRotate" customModule="Window" customModuleProvider="target">
-                                        <rect key="frame" x="0.49999999999997513" y="-3.5" width="48.000000000000057" height="775"/>
+                                        <rect key="frame" x="-2.4868995751603507e-14" y="-4" width="48.000000000000057" height="775"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rotation">
                                                 <real key="value" value="-90"/>

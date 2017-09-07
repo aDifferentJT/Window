@@ -33,6 +33,60 @@ extension CGRect {
     var area: CGFloat {
         return width * height
     }
+
+    var midPoint: CGPoint {
+        return CGPoint(x: midX, y: midY)
+    }
+}
+
+extension CGPoint {
+    init(_ a: Double) {
+        self = CGPoint(x: a, y: a)
+    }
+
+    init(_ a: Int) {
+        self = CGPoint(x: a, y: a)
+    }
+
+    init(_ a: CGFloat) {
+        self = CGPoint(x: a, y: a)
+    }
+
+    static func cgPointCombine(_ a: CGPoint, _ b: CGPoint, op: (CGFloat, CGFloat) -> CGFloat) -> CGPoint {
+        return CGPoint(x: op(a.x, b.x), y: op(a.y, b.y))
+    }
+
+    static func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+        return cgPointCombine(lhs, rhs, op: +)
+    }
+
+    static func /(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+        return cgPointCombine(lhs, rhs, op: /)
+    }
+
+    static func *(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+        return cgPointCombine(lhs, rhs, op: *)
+    }
+
+    static func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+        return cgPointCombine(lhs, rhs, op: -)
+        //return cgPointCombine(lhs, rhs, op: {abs($0 - $1)})
+    }
+
+    func orientated(to orientation: UIInterfaceOrientation) -> CGPoint {
+        switch orientation {
+        case .portrait:
+            return self
+        case .portraitUpsideDown:
+            return CGPoint(x: -x, y: -y)
+        case .landscapeLeft:
+            return CGPoint(x: y, y: -x)
+        case .landscapeRight:
+            return CGPoint(x: -y, y: x)
+        case .unknown:
+            return self
+        }
+    }
 }
 
 extension AVCaptureDevice.Format {
@@ -104,10 +158,12 @@ class FaceTracker: NSObject, AVCaptureMetadataOutputObjectsDelegate {
 
         if previewContainer != nil {
             preview = AVCaptureVideoPreviewLayer(session: captureSession)
-            preview!.frame = previewContainer!.bounds
+            preview!.bounds = previewContainer!.bounds
             preview!.videoGravity = .resizeAspect
             preview!.connection?.videoOrientation = AVCaptureVideoOrientation(UIApplication.shared.statusBarOrientation)
-
+            previewContainer?.widthAnchor
+            previewContainer!.widthAnchor.constraint(equalToConstant: preview!.preferredFrameSize().width).isActive = true
+            previewContainer!.heightAnchor.constraint(equalToConstant: preview!.preferredFrameSize().height).isActive = true
             previewContainer!.layer.addSublayer(preview!)
         }
 
@@ -124,7 +180,7 @@ class FaceTracker: NSObject, AVCaptureMetadataOutputObjectsDelegate {
 
     func metadataOutput(_ metadataOutput: AVCaptureMetadataOutput, didOutput objects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if let face = (objects.filter{$0.type == .face}.map{$0.bounds}.max{$0.area < $1.area}) {
-            callback(Location(x: xyScale * (Double(face.midY) - 0.5), y: xyScale * (0.5 - Double(face.midX)), z: zoom * 180 / .pi * atan(zoomCalibrate * sqrt(Double(face.area)))))
+            callback(Location(point: (CGPoint(xyScale) * (face.midPoint - CGPoint(0.5))).orientated(to: UIApplication.shared.statusBarOrientation), depth: zoom * 180 / .pi * atan(zoomCalibrate * sqrt(Double(face.area)))))
         }
     }
 }
