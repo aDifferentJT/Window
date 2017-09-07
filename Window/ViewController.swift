@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Vision
 import SceneKit
 
 class ViewController: UIViewController {

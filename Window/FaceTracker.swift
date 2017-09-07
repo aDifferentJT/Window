@@ -6,7 +6,6 @@
 //  Copyright © 2017 Jonathan Tanner. All rights reserved.
 //
 
-import Vision
 import AVFoundation
 
 struct Location {
@@ -62,7 +61,7 @@ class FaceTracker: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         captureSession = AVCaptureSession()
         captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
         do {try videoInput = AVCaptureDeviceInput(device: captureDevice)} catch {fatalError("No Video Input")}
-        videoDispatchQueue = DispatchQueue(label: "videoQueue", qos: .userInteractive, autoreleaseFrequency: .workItem)
+        videoDispatchQueue = DispatchQueue.main //DispatchQueue(label: "videoQueue", qos: .userInteractive, autoreleaseFrequency: .workItem)
         metadataOutput = AVCaptureMetadataOutput()
 
         super.init()
